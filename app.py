@@ -69,7 +69,7 @@ if generate:
             area_km2 = aoi_area_km2(gdf)
 
         # ---------------- SUMMARY CARD ----------------
-        st.subheader("📋 AOI Summary")
+        st.subheader("AOI Summary")
         c1, c2, c3, c4 = st.columns(4)
         c1.metric("Area", f"{area_km2:,.0f} km²")
         c2.metric("Mean PM₂.₅", f"{stats['mean']:.1f} µg/m³")
@@ -85,6 +85,7 @@ if generate:
             st.subheader("🗺 PM₂.₅ Map")
             fig, ax = plt.subplots(figsize=(7, 6))
             clipped.plot.imshow(ax=ax, cmap="YlOrRd", cbar_kwargs={"label": "µg/m³"})
+            ax.set_aspect("equal")
             ax.set_title(f"PM2.5 - {year}-{int(month):02d}")
             st.pyplot(fig)
 
@@ -97,7 +98,7 @@ if generate:
             st.write(f"**Std Dev:** {stats['std']:.2f} µg/m³")
             st.write(f"**Valid pixels:** {stats['valid_pixel_count']:,}")
 
-            st.subheader("🔥 PM₂.₅ Categories")
+            st.subheader("PM₂.₅ Categories")
             st.bar_chart(categories)
 
         # ---------------- MONTHLY TREND ----------------
