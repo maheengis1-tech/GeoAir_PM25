@@ -44,6 +44,7 @@ def export_png_map(clipped: xr.DataArray, out_path: str, title: str = "PM2.5 (ug
         add_colorbar=True,
         cbar_kwargs={"label": "PM2.5 (ug/m3)"},
     )
+    ax.set_aspect("equal")
     ax.set_title(title)
     ax.set_xlabel("Longitude")
     ax.set_ylabel("Latitude")
