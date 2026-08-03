@@ -104,8 +104,7 @@ if generate:
         # ---------------- MONTHLY TREND ----------------
   # ---------------- MONTHLY TREND ----------------
         st.subheader("📈 Monthly Trend")
-        with st.spinner("Computing trend across available months..."):
-            trend = monthly_trend(DATA_DIR, int(year), 12, gdf)
+       st.info("Monthly trend disabled for testing.")
         trend_months = [t["month"] for t in trend if t["mean"] is not None]
         trend_values = [t["mean"] for t in trend if t["mean"] is not None]
         if trend_values:
