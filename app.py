@@ -102,16 +102,21 @@ if generate:
             st.bar_chart(categories)
 
         # ---------------- MONTHLY TREND ----------------
+  # ---------------- MONTHLY TREND ----------------
         st.subheader("📈 Monthly Trend")
         with st.spinner("Computing trend across available months..."):
-            trend = monthly_trend(DATA_DIR, int(year), int(month), gdf)
+            trend = monthly_trend(DATA_DIR, int(year), 12, gdf)
         trend_months = [t["month"] for t in trend if t["mean"] is not None]
         trend_values = [t["mean"] for t in trend if t["mean"] is not None]
         if trend_values:
-            st.line_chart({"PM2.5 mean (µg/m³)": trend_values}, x_label="Month")
+            import pandas as pd
+            trend_df = pd.DataFrame(
+                {"PM2.5 mean (µg/m³)": trend_values},
+                index=pd.Index(trend_months, name="Month"),
+            )
+            st.line_chart(trend_df)
         else:
             st.info("Not enough monthly data available yet to plot a trend.")
-
         # ---------------- DOWNLOADS ----------------
         st.subheader("📥 Downloads")
         out_prefix = os.path.join(OUTPUT_DIR, f"{session_id}_{year}_{month:02d}")
