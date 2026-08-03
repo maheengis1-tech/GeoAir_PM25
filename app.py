@@ -103,19 +103,13 @@ if generate:
 
         # ---------------- MONTHLY TREND ----------------
   # ---------------- MONTHLY TREND ----------------
+        # ---------------- MONTHLY TREND ----------------
         st.subheader("📈 Monthly Trend")
-       st.info("Monthly trend disabled for testing.")
-        trend_months = [t["month"] for t in trend if t["mean"] is not None]
-        trend_values = [t["mean"] for t in trend if t["mean"] is not None]
-        if trend_values:
-            import pandas as pd
-            trend_df = pd.DataFrame(
-                {"PM2.5 mean (µg/m³)": trend_values},
-                index=pd.Index(trend_months, name="Month"),
-            )
-            st.line_chart(trend_df)
-        else:
-            st.info("Not enough monthly data available yet to plot a trend.")
+
+        # Temporary disabled for testing
+        st.info("Monthly trend disabled for testing.")
+
+        # ---------------- DOWNLOADS ----------------
         # ---------------- DOWNLOADS ----------------
         st.subheader("📥 Downloads")
         out_prefix = os.path.join(OUTPUT_DIR, f"{session_id}_{year}_{month:02d}")
